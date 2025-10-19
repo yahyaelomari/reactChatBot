@@ -326,8 +326,21 @@
   }
 
   function GenerateMessages({chatMessages}){
+    const containerElemRef = React.useRef(null)
+    React.useEffect(
+            ()=>{
+              const containerElem = containerElemRef.current;
+              if(containerElem) {
+                containerElem.scrollTop=containerElem.scrollHeight
+              }
+            },
+            [chatMessages]
+    )
+
+
+
     return (
-            <div className="messages-container">
+            <div className="messages-container" ref={containerElemRef}>
               {chatMessages.map((chatMessage) => (
                       <MessageBox
                               key={chatMessage.id}
